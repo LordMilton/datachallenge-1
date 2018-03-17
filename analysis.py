@@ -2,6 +2,7 @@ import pandas as pd
 import datetime
 
 #%%
+#cleaning
 races = pd.read_json("races.json")
 racers = pd.read_csv("racers.csv")
 
@@ -20,3 +21,6 @@ racers['birth date'] = temp
 
 races = races[['event', 'start', 'finish', 'runner first', 'runner last']]
 racers = racers[['first', 'last', 'birth date']]
+#%%
+old_racers = racers[racers['birth date'] < datetime.datetime.strptime('1988-01-01', "%Y-%m-%d")]
+young_racers = racers[racers['birth date'] >= datetime.datetime.strptime('1988-01-01', "%Y-%m-%d")]
