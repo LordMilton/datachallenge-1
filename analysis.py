@@ -22,10 +22,16 @@ racers['birth date'] = temp
 races = races[['event', 'start', 'finish', 'runner first', 'runner last']]
 racers = racers[['first', 'mid', 'last', 'birth date']]
 #%%
+#splitting
 racers['first'] = racers['first'] +' '+ racers['mid'] + '.'
-print(racers)
 racers = racers[['first', 'last', 'birth date']]
 old_racers = racers[racers['birth date'] < datetime.datetime.strptime('1988-01-01', "%Y-%m-%d")]
 young_racers = racers[racers['birth date'] >= datetime.datetime.strptime('1988-01-01', "%Y-%m-%d")]
-races.head()
-print(racers.head())
+#%%
+#merging
+old_races = pd.merge(old_racers, races, left_on=['first', 'last'], right_on=['runner first', 'runner last'])
+del(old_races['runner first'])
+del(old_races['runner last'])
+young_races = pd.merge(young_racers, races, left_on=['first', 'last'], right_on=['runner first', 'runner last'])
+del(young_races['runner first'])
+del(young_races['runner last'])
