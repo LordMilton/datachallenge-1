@@ -25,7 +25,9 @@ racers = racers[['first', 'mid', 'last', 'birth date']]
 races['start'] = pd.to_datetime(races['start'], format='%H:%M:%S')
 races['finish'] = pd.to_datetime(races['finish'], format='%H:%M:%S')
 races['time'] = races['finish'] - races['start']
-print(races['time'])
+del(races['finish'])
+del(races['start'])
+print(races)
 #%%
 #splitting
 racers['first'] = racers['first'] +' '+ racers['mid'] + '.'
